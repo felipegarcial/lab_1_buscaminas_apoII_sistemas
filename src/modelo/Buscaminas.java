@@ -7,69 +7,77 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
-
 package modelo;
 
-
 public class Buscaminas {
-
 
 	// -----------------------------------------------------------------
 	// Constantes
 	// -----------------------------------------------------------------
 
 	/**
-	 * Es una constante utilizada para indicar la cantidad de filas en el nivel principiante
+	 * Es una constante utilizada para indicar la cantidad de filas en el nivel
+	 * principiante
 	 */
 	public static final int FILAS_PRINCIPIANTE = 8;
 
 	/**
-	 * Es una constante utilizada para indicar la cantidad de filas en el nivel intermedio
+	 * Es una constante utilizada para indicar la cantidad de filas en el nivel
+	 * intermedio
 	 */
 	public static final int FILAS_INTERMEDIO = 16;
 
 	/**
-	 * Es una constante utilizada para indicar la cantidad de filas en el nivel experto
+	 * Es una constante utilizada para indicar la cantidad de filas en el nivel
+	 * experto
 	 */
 	public static final int FILAS_EXPERTO = 16;
 
 	/**
-	 * Es una constante utilizada para indicar la cantidad de columnas en el nivel principiante
+	 * Es una constante utilizada para indicar la cantidad de columnas en el nivel
+	 * principiante
 	 */
 	public static final int COLUMNAS_PRINCIPIANTE = 8;
 
 	/**
-	 * Es una constante utilizada para indicar la cantidad de columnas en el nivel intermedio
+	 * Es una constante utilizada para indicar la cantidad de columnas en el nivel
+	 * intermedio
 	 */
 	public static final int COLUMNAS_INTERMEDIO = 16;
 
 	/**
-	 * Es una constante utilizada para indicar la cantidad de columnas en el nivel experto
+	 * Es una constante utilizada para indicar la cantidad de columnas en el nivel
+	 * experto
 	 */
 	public static final int COLUMNAS_EXPERTO = 30;
 
 	/**
-	 * Es una constante utilizada para saber la dificultad del juego, representa el nivel principiante
+	 * Es una constante utilizada para saber la dificultad del juego, representa el
+	 * nivel principiante
 	 */
 	public static final int PRINCIPIANTE = 1;
 
 	/**
-	 * Es una constante utilizada para saber la dificultad del juego, representa el nivel intermedio
+	 * Es una constante utilizada para saber la dificultad del juego, representa el
+	 * nivel intermedio
 	 */
 	public static final int INTERMEDIO = 2;
 
 	/**
-	 * Es una constante utilizada para saber la dificultad del juego, representa el nivel experto
+	 * Es una constante utilizada para saber la dificultad del juego, representa el
+	 * nivel experto
 	 */
 	public static final int EXPERTO = 3;
 
 	/**
-	 * Es una constante utilizada para saber la cantidad de minas en nivel principiante
+	 * Es una constante utilizada para saber la cantidad de minas en nivel
+	 * principiante
 	 */
 	public static final int CANTIDAD_MINAS_PRINCIPANTE = 10;
 
 	/**
-	 * Es una constante utilizada para saber la cantidad de minas en nivel intermedio
+	 * Es una constante utilizada para saber la cantidad de minas en nivel
+	 * intermedio
 	 */
 	public static final int CANTIDAD_MINAS_INTERMEDIO = 40;
 
@@ -88,7 +96,8 @@ public class Buscaminas {
 	private Casilla[][] casillas;
 
 	/**
-	 * Atributo que representa el nivel del juego <Solo puede tomar valores PRINCIPIANTE, INTERMEDIO, EXPERTO>
+	 * Atributo que representa el nivel del juego <Solo puede tomar valores
+	 * PRINCIPIANTE, INTERMEDIO, EXPERTO>
 	 */
 	private int nivel;
 
@@ -108,6 +117,7 @@ public class Buscaminas {
 
 	/**
 	 * Constructo de la clase Buscaminas
+	 * 
 	 * @param nivel - el nivel seleccionado por el usuario
 	 */
 	public Buscaminas(int nivel) {
@@ -117,20 +127,32 @@ public class Buscaminas {
 
 	}
 
-
 	// -----------------------------------------------------------------
 	// Metodos
 	// -----------------------------------------------------------------
 
 	/**
-	 * Se encarga de inicializar los atributos y relaciones de la clase buscaminas a partir del nivel elegido por el usuario
+	 * Se encarga de inicializar los atributos y relaciones de la clase buscaminas a
+	 * partir del nivel elegido por el usuario
 	 */
 	private void inicializarPartida() {
+		switch (this.nivel) {
+		case PRINCIPIANTE:
+			casillas = new Casilla[FILAS_PRINCIPIANTE][COLUMNAS_PRINCIPIANTE];
+			break;
+		case INTERMEDIO:
+			casillas = new Casilla[FILAS_INTERMEDIO][COLUMNAS_INTERMEDIO];
+			
+			break;
+		case EXPERTO:
+			casillas = new Casilla[FILAS_EXPERTO][COLUMNAS_EXPERTO];
+			break;
 
-		// TODO
-
+		default:
+			casillas = new Casilla[FILAS_PRINCIPIANTE][COLUMNAS_PRINCIPIANTE];
+			break;
+		}
 	}
-
 
 	/**
 	 * Metodo que se encarga de inicializar todas las casillas que no son minas
@@ -141,9 +163,10 @@ public class Buscaminas {
 
 	}
 
-
 	/**
-	 * Metodo que permite contar la cantidad de minas que tiene alrededor una casillas
+	 * Metodo que permite contar la cantidad de minas que tiene alrededor una
+	 * casillas
+	 * 
 	 * @param i - La fila de la matriz
 	 * @param j - la columna de la matriz
 	 * @return int - La cantidad de minas que tiene alrededor la casilla [i][j]
@@ -161,12 +184,13 @@ public class Buscaminas {
 	public void generarMinas() {
 
 		// TODO
-		
+
 	}
 
-
 	/**
-	 * Metodo que se encarga de convertir el tablero a un String para poder verlo en pantalla
+	 * Metodo que se encarga de convertir el tablero a un String para poder verlo en
+	 * pantalla
+	 * 
 	 * @return String - El tablero en formato String
 	 */
 	public String mostrarTablero() {
@@ -175,7 +199,6 @@ public class Buscaminas {
 
 		return null;
 	}
-
 
 	/**
 	 * Metodo que se encarga de marcar todas las casillas como destapadas
@@ -188,17 +211,18 @@ public class Buscaminas {
 
 	/**
 	 * Metodo dar del atributo casillas
+	 * 
 	 * @return la relacion casillas
 	 */
-	public Casilla[][] darCasillas(){
+	public Casilla[][] darCasillas() {
 		return casillas;
 	}
 
-
 	/**
-	 * Este metodo se encargaa de abrir una casilla
-	 * Si se abre una casilla de tipo Mina, se marca que el jugador perdio el juego.
-	 * @param i - la fila donde esta la casilla 
+	 * Este metodo se encargaa de abrir una casilla Si se abre una casilla de tipo
+	 * Mina, se marca que el jugador perdio el juego.
+	 * 
+	 * @param i - la fila donde esta la casilla
 	 * @param j - la columna donde esta la casilla
 	 * @return boolean - true si fue posible destaparla, false en caso contrario
 	 */
@@ -207,9 +231,9 @@ public class Buscaminas {
 		return true;
 	}
 
-
 	/**
 	 * Metodo que se encarga de revisar si el jugador gano el juego
+	 * 
 	 * @return boolean - true si gano el juego, false en caso contrario
 	 */
 	public boolean gano() {
@@ -217,22 +241,26 @@ public class Buscaminas {
 		return true;
 	}
 
-
 	/**
-	 * Metodo que se encarga de abrir la primera casilla que no sea una Mina y cuyo valor sea Mayor que 0
-	 * @return String, Mensaje de la Casilla que marco abierta, En caso de no haber casillas posibles para dar una pista, retorna el mensaje no hay pistas para dar
+	 * Metodo que se encarga de abrir la primera casilla que no sea una Mina y cuyo
+	 * valor sea Mayor que 0
+	 * 
+	 * @return String, Mensaje de la Casilla que marco abierta, En caso de no haber
+	 *         casillas posibles para dar una pista, retorna el mensaje no hay
+	 *         pistas para dar
 	 */
 	public String darPista() {
 
 		// TODO
 		return null;
 	}
-	
+
 	/***
 	 * Metodo dar del atributo perdio
+	 * 
 	 * @return boolean el atributo
 	 */
-	public boolean darPerdio(){
+	public boolean darPerdio() {
 		return perdio;
 	}
 
