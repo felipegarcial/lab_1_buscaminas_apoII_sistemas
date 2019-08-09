@@ -9,6 +9,8 @@
 
 package modelo;
 
+import java.util.Random;
+
 public class Buscaminas {
 
 	// -----------------------------------------------------------------
@@ -139,6 +141,7 @@ public class Buscaminas {
 		switch (this.nivel) {
 		case PRINCIPIANTE:
 			casillas = new Casilla[FILAS_PRINCIPIANTE][COLUMNAS_PRINCIPIANTE];
+			
 			break;
 		case INTERMEDIO:
 			casillas = new Casilla[FILAS_INTERMEDIO][COLUMNAS_INTERMEDIO];
@@ -159,7 +162,13 @@ public class Buscaminas {
 	 */
 	public void inicializarCasillasLibres() {
 
-		// TODO
+		for (int i = 0; i < casillas.length; i++) {
+			for (int j = 0; j < casillas[1].length; j++) {
+				if(!casillas[i][j].esMina()) {
+					casillas[i][j] = new Casilla (Casilla.LIBRE);
+				}
+			}
+		}
 
 	}
 
@@ -182,9 +191,12 @@ public class Buscaminas {
 	 * Método que se encarga de generar aleatoriomente las minas
 	 */
 	public void generarMinas() {
-
-		// TODO
-
+		Random r = new Random();
+		boolean totalMinasPuestas = false;
+		
+		while (totalMinasPuestas) {
+			
+		}
 	}
 
 	/**
