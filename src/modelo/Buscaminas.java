@@ -217,18 +217,40 @@ public class Buscaminas {
 	 */
 	public String mostrarTablero() {
 
-		// TODO
-
-		return null;
+		String tableroString = "";
+		
+		String tabStrNumCol = "";
+		for (int i = 0; i < casillas.length; i++) {
+			
+			tableroString+=(i+1);
+			tableroString+= i+1<10 ?"  ":" ";
+			
+			for (int j = 0; j < casillas[0].length; j++) {
+				if(i==0) {
+					tabStrNumCol+=(j+1);
+					tabStrNumCol+=j+1<10?"  ":" ";
+				}
+				tableroString+="-  ";
+				if(j == casillas[0].length-1) {
+					tableroString+="\n";
+				}
+			}
+		}
+				
+		return "   "+tabStrNumCol+"\n"+tableroString;
 	}
 
 	/**
 	 * Metodo que se encarga de marcar todas las casillas como destapadas
 	 */
 	public void resolver() {
-
-		// TODO
-
+		for (int i = 0; i < casillas.length; i++) {
+			for (int j = 0; j < casillas[0].length; j++) {
+				if(casillas[i][j].darSeleccionada()) {
+					casillas[i][j].destapar();
+				}
+			}
+		}
 	}
 
 	/**
@@ -249,8 +271,15 @@ public class Buscaminas {
 	 * @return boolean - true si fue posible destaparla, false en caso contrario
 	 */
 	public boolean abrirCasilla(int i, int j) {
-		// TODO
-		return true;
+		if(casillas[i][j].esMina()) {
+			return false;
+		}
+		
+		if(!casillas[i][j].darSeleccionada()) {
+			casillas[i][j].destapar();
+			return true;
+		}	
+		return false;
 	}
 
 	/**
