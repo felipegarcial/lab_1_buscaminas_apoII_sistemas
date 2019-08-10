@@ -141,20 +141,21 @@ public class Buscaminas {
 		switch (this.nivel) {
 		case PRINCIPIANTE:
 			casillas = new Casilla[FILAS_PRINCIPIANTE][COLUMNAS_PRINCIPIANTE];
-			
 			break;
 		case INTERMEDIO:
 			casillas = new Casilla[FILAS_INTERMEDIO][COLUMNAS_INTERMEDIO];
-			
 			break;
 		case EXPERTO:
 			casillas = new Casilla[FILAS_EXPERTO][COLUMNAS_EXPERTO];
 			break;
-
 		default:
 			casillas = new Casilla[FILAS_PRINCIPIANTE][COLUMNAS_PRINCIPIANTE];
 			break;
 		}
+
+		generarMinas();
+		inicializarCasillasLibres();
+
 	}
 
 	/**
@@ -164,12 +165,11 @@ public class Buscaminas {
 
 		for (int i = 0; i < casillas.length; i++) {
 			for (int j = 0; j < casillas[1].length; j++) {
-				if(!casillas[i][j].esMina()) {
-					casillas[i][j] = new Casilla (Casilla.LIBRE);
+				if (casillas[i][j] == null) {
+					casillas[i][j] = new Casilla(Casilla.LIBRE);
 				}
 			}
 		}
-
 	}
 
 	/**
@@ -191,11 +191,21 @@ public class Buscaminas {
 	 * Método que se encarga de generar aleatoriomente las minas
 	 */
 	public void generarMinas() {
-		Random r = new Random();
-		boolean totalMinasPuestas = false;
-		
-		while (totalMinasPuestas) {
-			
+
+		Random random = new Random();
+
+		int indice = 0;
+		int cantMinas = this.nivel == PRINCIPIANTE ? CANTIDAD_MINAS_PRINCIPANTE
+				: this.nivel == INTERMEDIO ? CANTIDAD_MINAS_INTERMEDIO : CANTIDAD_MINAS_EXPERTO;
+
+		while (indice < cantMinas) {
+			int numAleX = random.nextInt(darCasillas().length);
+			int numAleY = random.nextInt(darCasillas()[0].length);
+			if (casillas[numAleX][numAleY] == null) {
+				casillas[numAleX][numAleY] = new Casilla(Casilla.MINA);
+				indice++;
+			}
+
 		}
 	}
 
