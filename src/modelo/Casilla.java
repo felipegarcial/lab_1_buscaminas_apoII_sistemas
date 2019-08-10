@@ -88,7 +88,8 @@ public class Casilla {
 	public String mostrarValorCasilla(){
 		String valor = "";
 		
-		if(!seleccionada){
+	
+		 if(!seleccionada){
 			valor = "-";
 		}else if(esMina()) {
 			valor = "*";

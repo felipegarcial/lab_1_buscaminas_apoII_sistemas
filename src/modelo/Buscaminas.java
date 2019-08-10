@@ -91,7 +91,7 @@ public class Buscaminas {
 	// -----------------------------------------------------------------
 	// Atributos y relaciones
 	// -----------------------------------------------------------------
-
+	private int cantMinas;
 	/**
 	 * Relacion que tiene la matriz de casillas
 	 */
@@ -141,18 +141,20 @@ public class Buscaminas {
 		switch (this.nivel) {
 		case PRINCIPIANTE:
 			casillas = new Casilla[FILAS_PRINCIPIANTE][COLUMNAS_PRINCIPIANTE];
+			cantMinas = CANTIDAD_MINAS_PRINCIPANTE;
 			break;
 		case INTERMEDIO:
 			casillas = new Casilla[FILAS_INTERMEDIO][COLUMNAS_INTERMEDIO];
+			cantMinas = CANTIDAD_MINAS_INTERMEDIO;
 			break;
 		case EXPERTO:
 			casillas = new Casilla[FILAS_EXPERTO][COLUMNAS_EXPERTO];
+			cantMinas = CANTIDAD_MINAS_EXPERTO;
 			break;
 		default:
 			casillas = new Casilla[FILAS_PRINCIPIANTE][COLUMNAS_PRINCIPIANTE];
 			break;
 		}
-
 		generarMinas();
 		inicializarCasillasLibres();
 
@@ -195,8 +197,7 @@ public class Buscaminas {
 		Random random = new Random();
 
 		int indice = 0;
-		int cantMinas = this.nivel == PRINCIPIANTE ? CANTIDAD_MINAS_PRINCIPANTE
-				: this.nivel == INTERMEDIO ? CANTIDAD_MINAS_INTERMEDIO : CANTIDAD_MINAS_EXPERTO;
+
 
 		while (indice < cantMinas) {
 			int numAleX = random.nextInt(darCasillas().length);
@@ -218,25 +219,26 @@ public class Buscaminas {
 	public String mostrarTablero() {
 
 		String tableroString = "";
-		
 		String tabStrNumCol = "";
+		//------------------------
 		for (int i = 0; i < casillas.length; i++) {
-			
 			tableroString+=(i+1);
 			tableroString+= i+1<10 ?"  ":" ";
-			
 			for (int j = 0; j < casillas[0].length; j++) {
 				if(i==0) {
 					tabStrNumCol+=(j+1);
 					tabStrNumCol+=j+1<10?"  ":" ";
 				}
-				tableroString+="-  ";
+				//------------------------
+				tableroString+= casillas[i][j].mostrarValorCasilla()+"  ";
+				//------------------------
 				if(j == casillas[0].length-1) {
 					tableroString+="\n";
 				}
+				//------------------------
 			}
 		}
-				
+		//------------------------		
 		return "   "+tabStrNumCol+"\n"+tableroString;
 	}
 
@@ -246,7 +248,7 @@ public class Buscaminas {
 	public void resolver() {
 		for (int i = 0; i < casillas.length; i++) {
 			for (int j = 0; j < casillas[0].length; j++) {
-				if(casillas[i][j].darSeleccionada()) {
+				if(!casillas[i][j].darSeleccionada()) {
 					casillas[i][j].destapar();
 				}
 			}
@@ -272,7 +274,7 @@ public class Buscaminas {
 	 */
 	public boolean abrirCasilla(int i, int j) {
 		if(casillas[i][j].esMina()) {
-			return false;
+			perdio=true;
 		}
 		
 		if(!casillas[i][j].darSeleccionada()) {
@@ -288,8 +290,23 @@ public class Buscaminas {
 	 * @return boolean - true si gano el juego, false en caso contrario
 	 */
 	public boolean gano() {
-		// TODO
-		return true;
+		int contadorCasillasAbiertas = 0;
+		//------------------------------
+		for (int i = 0; i < casillas.length; i++) {
+			for (int j = 0; j < casillas[0].length; j++) {
+				if(casillas[i][j].darSeleccionada()) {
+					contadorCasillasAbiertas++;
+				}
+			}
+		}
+		//------------------------------
+		int cantCasillas = casillas.length * casillas[0].length;
+		//------------------------------
+		if(contadorCasillasAbiertas - cantMinas == cantCasillas - cantMinas ) {
+			return true;
+		}
+		
+		return false;
 	}
 
 	/**
