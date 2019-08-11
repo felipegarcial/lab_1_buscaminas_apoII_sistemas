@@ -7,51 +7,50 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
-
 package modelo;
 
 public class Casilla {
-	
-	
+
 	// -----------------------------------------------------------------
-    // Constantes
-    // -----------------------------------------------------------------
-	
-    /**
-     * Es una constante utilizada para indicar que la casilla es de tipo Mina
-     */
+	// Constantes
+	// -----------------------------------------------------------------
+
+	/**
+	 * Es una constante utilizada para indicar que la casilla es de tipo Mina
+	 */
 	public static final int MINA = 100;
-	
-	 /**
-     * Es una constante utilizada para indicar que la casilla no es de tipo Mina
-     */
+
+	/**
+	 * Es una constante utilizada para indicar que la casilla no es de tipo Mina
+	 */
 	public static final int LIBRE = 50;
 
 	// -----------------------------------------------------------------
-    // Atributos y relaciones
-    // -----------------------------------------------------------------
+	// Atributos y relaciones
+	// -----------------------------------------------------------------
 
 	/**
 	 * Es el tipo de la casilla <Solo puede ser tipo MINA o LIBRE>
 	 */
 	private int tipo;
-	
+
 	/**
 	 * Atributo que indica si la casilla ya fue seleccionada
 	 */
 	private boolean seleccionada;
-	
+
 	/**
 	 * Atributo que indica la cantidad de minas que tiene alrededor una casilla.
 	 */
 	private int valor;
 
-	 // -----------------------------------------------------------------
-    // Constructores
-    // -----------------------------------------------------------------
+	// -----------------------------------------------------------------
+	// Constructores
+	// -----------------------------------------------------------------
 
 	/**
 	 * Constructor de la clase Casilla
+	 * 
 	 * @param tipo - El tipo de la casilla
 	 */
 	public Casilla(int tipo) {
@@ -59,69 +58,71 @@ public class Casilla {
 		seleccionada = false;
 		valor = -1;
 	}
-	
 
-    // -----------------------------------------------------------------
-    // Metodos
-    // -----------------------------------------------------------------
-    
+	// -----------------------------------------------------------------
+	// Metodos
+	// -----------------------------------------------------------------
+
 	/**
 	 * Metodo modificar del atributo valor
+	 * 
 	 * @param valor - nuevo valor
 	 */
-	public void modificarValor(int valor){
+	public void modificarValor(int valor) {
 		this.valor = valor;
 	}
-	
+
 	/**
 	 * Retorna true si una casilla es de tipo Mina, false en caso contrario
+	 * 
 	 * @return
 	 */
-	public boolean esMina(){
+	public boolean esMina() {
 		return tipo == MINA;
 	}
-	
+
 	/**
 	 * Genera un String que representa el valor que se debe mostrar de la casilla
+	 * 
 	 * @return El String con la representación actual de la casilla
 	 */
-	public String mostrarValorCasilla(){
+	public String mostrarValorCasilla() {
 		String valor = "";
-		
-	
-		 if(!seleccionada){
+
+		if (!seleccionada) {
 			valor = "-";
-		}else if(esMina()) {
+		} else if (esMina()) {
 			valor = "*";
-		}else {
-			valor = this.valor+"";
+		} else {
+			valor = this.valor + "";
 		}
-		
+
 		return valor;
 	}
-	
+
 	/**
 	 * Marca la casilla como que ya fue selecciona
 	 */
-	public void destapar(){
+	public void destapar() {
 		seleccionada = true;
 	}
-	
+
 	/**
 	 * Metodo dar del atributo seleccionda
+	 * 
 	 * @return el atributo
 	 */
-	public boolean darSeleccionada(){
+	public boolean darSeleccionada() {
 		return seleccionada;
 	}
-	
+
 	/**
-	 *  Metodo dar del atributo valor
+	 * Metodo dar del atributo valor
+	 * 
 	 * @return el valor
 	 */
-	public int darValor(){
+	public int darValor() {
 		return valor;
 	}
-	
-	
+
 }

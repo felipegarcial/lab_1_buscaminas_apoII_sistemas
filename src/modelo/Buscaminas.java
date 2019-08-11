@@ -184,34 +184,34 @@ public class Buscaminas {
 	 */
 	public int cantidadMinasAlrededor(int i, int j) {
 		int contadorMinas = 0;
-		//=========================
-    	if(i-1>=0 && j-1>0 && casillas[i-1][j-1].esMina()){
-            contadorMinas+=1;
-        }
-		if(j-1 > 0 && casillas[i][j-1].esMina()){
-            contadorMinas+=1;
-        }
-		if(i+1<=casillas.length && j-1>0 && casillas[i+1][j-1].esMina()){
-            contadorMinas+=1;
-        }
-		//=========================
-		if(i-1>=0 && casillas[i-1][j].esMina()){
-            contadorMinas+=1;
-        }
-		if(i+1<=casillas.length && casillas[i+1][j].esMina()){
-            contadorMinas+=1;
-        }
-		//=========================
-		if(i-1>=0 && j+1< casillas[0].length && casillas[i-1][j+1].esMina()){
-            contadorMinas+=1;
-        }
-		if(j+1< casillas[0].length && casillas[i][j+1].esMina()){
-            contadorMinas+=1;
-        }
-		if(i+1<=casillas.length && j+1< casillas[0].length && casillas[i+1][j+1].esMina()){
-            contadorMinas+=1;
-        }
-		//=========================
+		// =========================
+		if (i - 1 >= 0 && j - 1 > 0 && casillas[i - 1][j - 1].esMina()) {
+			contadorMinas += 1;
+		}
+		if (j - 1 > 0 && casillas[i][j - 1].esMina()) {
+			contadorMinas += 1;
+		}
+		if (i + 1 <= casillas.length && j - 1 > 0 && casillas[i + 1][j - 1].esMina()) {
+			contadorMinas += 1;
+		}
+		// =========================
+		if (i - 1 >= 0 && casillas[i - 1][j].esMina()) {
+			contadorMinas += 1;
+		}
+		if (i + 1 <= casillas.length && casillas[i + 1][j].esMina()) {
+			contadorMinas += 1;
+		}
+		// =========================
+		if (i - 1 >= 0 && j + 1 < casillas[0].length && casillas[i - 1][j + 1].esMina()) {
+			contadorMinas += 1;
+		}
+		if (j + 1 < casillas[0].length && casillas[i][j + 1].esMina()) {
+			contadorMinas += 1;
+		}
+		if (i + 1 <= casillas.length && j + 1 < casillas[0].length && casillas[i + 1][j + 1].esMina()) {
+			contadorMinas += 1;
+		}
+		// =========================
 		return contadorMinas;
 	}
 
@@ -223,7 +223,6 @@ public class Buscaminas {
 		Random random = new Random();
 
 		int indice = 0;
-
 
 		while (indice < cantMinas) {
 			int numAleX = random.nextInt(darCasillas().length);
@@ -246,26 +245,26 @@ public class Buscaminas {
 
 		String tableroString = "";
 		String tabStrNumCol = "";
-		//------------------------
+		// ------------------------
 		for (int i = 0; i < casillas.length; i++) {
-			tableroString+=(i+1);
-			tableroString+= i+1<10 ?"  ":" ";
+			tableroString += (i + 1);
+			tableroString += i + 1 < 10 ? "  " : " ";
 			for (int j = 0; j < casillas[0].length; j++) {
-				if(i==0) {
-					tabStrNumCol+=(j+1);
-					tabStrNumCol+=j+1<10?"  ":" ";
+				if (i == 0) {
+					tabStrNumCol += (j + 1);
+					tabStrNumCol += j + 1 < 10 ? "  " : " ";
 				}
-				//------------------------
-				tableroString+= casillas[i][j].mostrarValorCasilla()+"  ";
-				//------------------------
-				if(j == casillas[0].length-1) {
-					tableroString+="\n";
+				// ------------------------
+				tableroString += casillas[i][j].mostrarValorCasilla() + "  ";
+				// ------------------------
+				if (j == casillas[0].length - 1) {
+					tableroString += "\n";
 				}
-				//------------------------
+				// ------------------------
 			}
 		}
-		//------------------------		
-		return "   "+tabStrNumCol+"\n"+tableroString;
+		// ------------------------
+		return "   " + tabStrNumCol + "\n" + tableroString;
 	}
 
 	/**
@@ -274,7 +273,7 @@ public class Buscaminas {
 	public void resolver() {
 		for (int i = 0; i < casillas.length; i++) {
 			for (int j = 0; j < casillas[0].length; j++) {
-				if(!casillas[i][j].darSeleccionada()) {
+				if (!casillas[i][j].darSeleccionada()) {
 					casillas[i][j].destapar();
 				}
 			}
@@ -299,14 +298,15 @@ public class Buscaminas {
 	 * @return boolean - true si fue posible destaparla, false en caso contrario
 	 */
 	public boolean abrirCasilla(int i, int j) {
-		if(casillas[i][j].esMina()) {
-			perdio=true;
+		if (casillas[i][j].esMina()) {
+			perdio = true;
 		}
-		
-		if(!casillas[i][j].darSeleccionada()) {
+
+		if (!casillas[i][j].darSeleccionada()) {
+			casillas[i][j].modificarValor(cantidadMinasAlrededor(i, j));
 			casillas[i][j].destapar();
 			return true;
-		}	
+		}
 		return false;
 	}
 
@@ -317,21 +317,21 @@ public class Buscaminas {
 	 */
 	public boolean gano() {
 		int contadorCasillasAbiertas = 0;
-		//------------------------------
+		// ------------------------------
 		for (int i = 0; i < casillas.length; i++) {
 			for (int j = 0; j < casillas[0].length; j++) {
-				if(casillas[i][j].darSeleccionada()) {
+				if (casillas[i][j].darSeleccionada()) {
 					contadorCasillasAbiertas++;
 				}
 			}
 		}
-		//------------------------------
+		// ------------------------------
 		int cantCasillas = casillas.length * casillas[0].length;
-		//------------------------------
-		if(contadorCasillasAbiertas - cantMinas == cantCasillas - cantMinas ) {
+		// ------------------------------
+		if (contadorCasillasAbiertas - cantMinas == cantCasillas - cantMinas) {
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -346,13 +346,13 @@ public class Buscaminas {
 	public String darPista() {
 		for (int i = 0; i < casillas.length; i++) {
 			for (int j = 0; j < casillas[0].length; j++) {
-				if(casillas[i][j].darValor()>0) {
+				if (!casillas[i][j].esMina() && casillas[i][j].darValor() > 0) {
 					casillas[i][j].destapar();
-					return "Se abrió la casilla en la fila:"+" "+(i+1)+" "+"y en la culumna:"+" "+(j+1);
+					return "Se abrió la casilla en la fila:" + " " + (i + 1) + " " + "y en la culumna:" + " " + (j + 1);
 				}
 			}
 		}
-		
+
 		return "No hay pistas para dar";
 	}
 
