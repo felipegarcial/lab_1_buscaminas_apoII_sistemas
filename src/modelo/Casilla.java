@@ -56,7 +56,7 @@ public class Casilla {
 	public Casilla(int tipo) {
 		this.tipo = tipo;
 		seleccionada = false;
-		valor = -1;
+		valor = 0;
 	}
 
 	// -----------------------------------------------------------------
@@ -96,7 +96,7 @@ public class Casilla {
 		} else {
 			valor = this.valor + "";
 		}
-
+		
 		return valor;
 	}
 
