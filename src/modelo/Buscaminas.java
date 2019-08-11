@@ -183,10 +183,36 @@ public class Buscaminas {
 	 * @return int - La cantidad de minas que tiene alrededor la casilla [i][j]
 	 */
 	public int cantidadMinasAlrededor(int i, int j) {
-
-		// TODO
-
-		return 0;
+		int contadorMinas = 0;
+		//=========================
+    	if(i-1>=0 && j-1>0 && casillas[i-1][j-1].esMina()){
+            contadorMinas+=1;
+        }
+		if(j-1 > 0 && casillas[i][j-1].esMina()){
+            contadorMinas+=1;
+        }
+		if(i+1<=casillas.length && j-1>0 && casillas[i+1][j-1].esMina()){
+            contadorMinas+=1;
+        }
+		//=========================
+		if(i-1>=0 && casillas[i-1][j].esMina()){
+            contadorMinas+=1;
+        }
+		if(i+1<=casillas.length && casillas[i+1][j].esMina()){
+            contadorMinas+=1;
+        }
+		//=========================
+		if(i-1>=0 && j+1< casillas[0].length && casillas[i-1][j+1].esMina()){
+            contadorMinas+=1;
+        }
+		if(j+1< casillas[0].length && casillas[i][j+1].esMina()){
+            contadorMinas+=1;
+        }
+		if(i+1<=casillas.length && j+1< casillas[0].length && casillas[i+1][j+1].esMina()){
+            contadorMinas+=1;
+        }
+		//=========================
+		return contadorMinas;
 	}
 
 	/**
@@ -318,9 +344,16 @@ public class Buscaminas {
 	 *         pistas para dar
 	 */
 	public String darPista() {
-
-		// TODO
-		return null;
+		for (int i = 0; i < casillas.length; i++) {
+			for (int j = 0; j < casillas[0].length; j++) {
+				if(casillas[i][j].darValor()>0) {
+					casillas[i][j].destapar();
+					return "Se abrió la casilla en la fila:"+" "+(i+1)+" "+"y en la culumna:"+" "+(j+1);
+				}
+			}
+		}
+		
+		return "No hay pistas para dar";
 	}
 
 	/***
