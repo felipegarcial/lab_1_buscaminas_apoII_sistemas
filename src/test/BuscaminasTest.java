@@ -2,11 +2,10 @@ package test;
 
 import junit.framework.TestCase;
 import modelo.Buscaminas;
-import modelo.Casilla;
 
 public class BuscaminasTest extends TestCase{
 	private Buscaminas buscaminas;
-	private int nivel = 1;
+	private int nivel = 3;
 	private void setupEsceneario(int nivel) {
 		buscaminas = new Buscaminas(nivel);
 	}
@@ -30,9 +29,61 @@ public class BuscaminasTest extends TestCase{
 		}else if(nivel == 2) {
 			minas = 40;
 		}else if(nivel == 3) {
-			minas = 90;
+			minas = 99;
 		}
 		return minas;
+	}
+	
+	private String tableroNivel(int nivel) {
+		String tablero = ""; 
+		if(nivel == 1) {
+			tablero ="   1  2  3  4  5  6  7  8  \n" +
+					"1  -  -  -  -  -  -  -  -  \n" + 
+					"2  -  -  -  -  -  -  -  -  \n" + 
+					"3  -  -  -  -  -  -  -  -  \n" + 
+					"4  -  -  -  -  -  -  -  -  \n" + 
+					"5  -  -  -  -  -  -  -  -  \n" + 
+					"6  -  -  -  -  -  -  -  -  \n" + 
+					"7  -  -  -  -  -  -  -  -  \n" + 
+					"8  -  -  -  -  -  -  -  -  \n";
+		}else if(nivel == 2) {
+			tablero ="   1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 \n" + 
+					"1  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"2  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"3  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"4  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"5  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"6  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"7  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"8  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"9  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"10 -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"11 -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"12 -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"13 -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"14 -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"15 -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"16 -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n";
+		}else if(nivel == 3) {
+			tablero = "   1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 \n" + 
+					"1  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"2  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"3  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"4  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"5  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"6  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"7  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"8  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"9  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"10 -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"11 -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"12 -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"13 -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"14 -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"15 -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n" + 
+					"16 -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  \n";
+		}
+		return tablero;
 	}
 	
 	public void testInicializarPartida() {
@@ -51,6 +102,7 @@ public class BuscaminasTest extends TestCase{
 				}
 			}
 		}
+		System.out.println(minas);
 		assertEquals(minas,numeroMinasNivel(nivel));
 	}
 	
@@ -67,5 +119,10 @@ public class BuscaminasTest extends TestCase{
 		assertEquals(casillasLibres,numeroCasillasNivel(nivel)-numeroMinasNivel(nivel));
 	}
 	
-
+	
+	
+	public void testMostrarTablero() {
+		setupEsceneario(nivel);
+		assertEquals(tableroNivel(nivel),buscaminas.mostrarTablero());
+	}
 }
