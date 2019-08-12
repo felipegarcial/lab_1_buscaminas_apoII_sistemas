@@ -319,7 +319,6 @@ public class Buscaminas {
 		}
 
 		if (!casillas[i][j].darSeleccionada()) {
-			casillas[i][j].modificarValor(cantidadMinasAlrededor(i, j));
 			casillas[i][j].destapar();
 			return true;
 		}

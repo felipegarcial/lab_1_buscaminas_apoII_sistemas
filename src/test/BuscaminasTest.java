@@ -158,4 +158,43 @@ public class BuscaminasTest extends TestCase{
 		buscaminas.abrirCasilla(iCasilla, jCasilla);
 		assertTrue(buscaminas.darPerdio()) ;
 	}
+	
+	public void testAbrirCasillaAbierta () {
+		setupEsceneario(nivel);
+		
+		int iCasilla = 0;
+		int jCasilla = 0;
+		
+		for (int i = 0; i < buscaminas.darCasillas().length; i++) {
+			for (int j = 0; j < buscaminas.darCasillas()[0].length; j++) {
+				if(!buscaminas.darCasillas()[i][j].esMina() && !buscaminas.darCasillas()[i][j].darSeleccionada()) {
+					iCasilla = i;
+					jCasilla = j;
+					buscaminas.abrirCasilla(iCasilla, jCasilla);
+					break;
+				}
+			}
+		}
+		
+		assertFalse(buscaminas.abrirCasilla(iCasilla, jCasilla));
+	}
+	
+	public void testAbrirCasillaCerrada () {
+		setupEsceneario(nivel);
+		
+		int iCasilla = 0;
+		int jCasilla = 0;
+		
+		for (int i = 0; i < buscaminas.darCasillas().length; i++) {
+			for (int j = 0; j < buscaminas.darCasillas()[0].length; j++) {
+				if(!buscaminas.darCasillas()[i][j].esMina() && !buscaminas.darCasillas()[i][j].darSeleccionada()) {
+					iCasilla = i;
+					jCasilla = j;
+					break;
+				}
+			}
+		}
+		
+		assertTrue(buscaminas.abrirCasilla(iCasilla, jCasilla));
+	}
 }
