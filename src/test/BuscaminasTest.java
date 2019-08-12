@@ -102,7 +102,6 @@ public class BuscaminasTest extends TestCase{
 				}
 			}
 		}
-		System.out.println(minas);
 		assertEquals(minas,numeroMinasNivel(nivel));
 	}
 	
@@ -138,5 +137,25 @@ public class BuscaminasTest extends TestCase{
 		}
 		
 		assertTrue(casillasAbiertas==numeroCasillasNivel(nivel));
+	}
+	
+	public void testAbrirCasillaPerder () {
+		setupEsceneario(nivel);
+		
+		int iCasilla = 0;
+		int jCasilla = 0;
+		
+		for (int i = 0; i < buscaminas.darCasillas().length; i++) {
+			for (int j = 0; j < buscaminas.darCasillas()[0].length; j++) {
+				if(buscaminas.darCasillas()[i][j].esMina()) {
+					iCasilla = i;
+					jCasilla = j;
+					break;
+				}
+			}
+		}
+		
+		buscaminas.abrirCasilla(iCasilla, jCasilla);
+		assertTrue(buscaminas.darPerdio()) ;
 	}
 }
