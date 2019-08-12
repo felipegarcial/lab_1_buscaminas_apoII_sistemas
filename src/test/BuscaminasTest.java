@@ -120,9 +120,23 @@ public class BuscaminasTest extends TestCase{
 	}
 	
 	
-	
 	public void testMostrarTablero() {
 		setupEsceneario(nivel);
 		assertEquals(tableroNivel(nivel),buscaminas.mostrarTablero());
+	}
+	
+	public void testResolver() {
+		setupEsceneario(nivel);
+		buscaminas.resolver();
+		int casillasAbiertas = 0;
+		for (int i = 0; i < buscaminas.darCasillas().length; i++) {
+			for (int j = 0; j < buscaminas.darCasillas()[0].length; j++) {
+				if(buscaminas.darCasillas()[i][j].darSeleccionada()) {
+					casillasAbiertas++;
+				}
+			}
+		}
+		
+		assertTrue(casillasAbiertas==numeroCasillasNivel(nivel));
 	}
 }
