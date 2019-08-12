@@ -6,7 +6,6 @@ import modelo.Casilla;
 
 public class BuscaminasTest extends TestCase{
 	private Buscaminas buscaminas;
-	private Casilla[][] casillas;
 	private int nivel = 1;
 	private void setupEsceneario(int nivel) {
 		buscaminas = new Buscaminas(nivel);
@@ -44,7 +43,29 @@ public class BuscaminasTest extends TestCase{
 	
 	public void testGenerarMinas() {
 		setupEsceneario(nivel);
-		boolean condition = buscaminas.darCasillas().length * buscaminas.darCasillas()[0].length == numeroCasillasNivel(nivel); 
-		assertTrue(condition);
+		int minas = 0;
+		for (int i = 0; i < buscaminas.darCasillas().length; i++) {
+			for (int j = 0; j < buscaminas.darCasillas()[0].length; j++) {
+				if(buscaminas.darCasillas()[i][j].esMina()) {
+					minas++;
+				}
+			}
+		}
+		assertEquals(minas,numeroMinasNivel(nivel));
 	}
+	
+	public void testInicializarCasillasLibres() {
+		setupEsceneario(nivel);
+		int casillasLibres = 0;
+		for (int i = 0; i < buscaminas.darCasillas().length; i++) {
+			for (int j = 0; j < buscaminas.darCasillas()[0].length; j++) {
+				if(!buscaminas.darCasillas()[i][j].esMina()) {
+					casillasLibres++;
+				}
+			}
+		}
+		assertEquals(casillasLibres,numeroCasillasNivel(nivel)-numeroMinasNivel(nivel));
+	}
+	
+
 }
