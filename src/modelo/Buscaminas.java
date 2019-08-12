@@ -158,7 +158,6 @@ public class Buscaminas {
 		generarMinas();
 		inicializarCasillasLibres();
 		inicializarValorCasillasLibres();
-
 	}
 
 	/**
