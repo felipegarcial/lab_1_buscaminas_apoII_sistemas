@@ -15,6 +15,7 @@ import java.util.Scanner;
 import excepciones.ExcepcionColumnaInvalida;
 import excepciones.ExcepcionComandoInvalido;
 import excepciones.ExcepcionFilaInvalida;
+import excepciones.ExcepcionNivelInvalido;
 import modelo.Buscaminas;
 
 public class Menu {
@@ -210,16 +211,20 @@ public class Menu {
 
 		while (seleccion<1 || seleccion>3) {
 
-			System.out.println("Por favor elija el nivel de dificultad: ");
-			System.out.println("1. Principiante ");
-			System.out.println("2. Intermedio ");
-			System.out.println("3. Experto ");
-			
-			seleccion = lector.nextInt();
-			lector.nextLine();
+			try {
+				System.out.println("Por favor elija el nivel de dificultad: ");
+				System.out.println("1. Principiante ");
+				System.out.println("2. Intermedio ");
+				System.out.println("3. Experto ");
+				
+				seleccion = lector.nextInt();
+				lector.nextLine();
 
-			if(seleccion<1 || seleccion>3){
-				System.out.println("Por favor ingrese un valor correcto");
+				if(seleccion<1 || seleccion>3) {
+					throw new ExcepcionNivelInvalido("Por favor ingrese un valor correcto");
+				}
+			} catch (ExcepcionNivelInvalido e) {
+				System.out.println(e.getMessage());
 			}
 		}
 
