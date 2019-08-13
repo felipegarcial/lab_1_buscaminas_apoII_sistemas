@@ -1,5 +1,8 @@
 package test;
 
+import excepciones.ExcepcionColumnaInvalida;
+import excepciones.ExcepcionFilaInvalida;
+
 import junit.framework.TestCase;
 import modelo.Buscaminas;
 
@@ -252,6 +255,19 @@ public class BuscaminasTest extends TestCase{
 		}
 		
 		assertTrue(buscaminas.gano());
+	}
+	
+	public void testFilaInvalida() {
+		setupEsceneario(nivel);
+		int fila = 0;
+		try {
+			if(fila<=0) {
+				throw new ExcepcionFilaInvalida("La fila no puede ser menor o igual a 0");
+			}
+		} catch (ExcepcionFilaInvalida e) {
+			assertEquals("La fila no puede ser menor o igual a 0", e.getMessage());
+			
+		}
 	}
 
 }

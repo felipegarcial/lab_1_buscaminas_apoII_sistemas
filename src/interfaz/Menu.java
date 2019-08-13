@@ -11,6 +11,10 @@
 package interfaz;
 
 import java.util.Scanner;
+
+import excepciones.ExcepcionColumnaInvalida;
+import excepciones.ExcepcionComandoInvalido;
+import excepciones.ExcepcionFilaInvalida;
 import modelo.Buscaminas;
 
 public class Menu {
@@ -43,7 +47,12 @@ public class Menu {
 		mostrarBienvenida();
 		int dificultad = seleccionarDificultad();
 		juego = new Buscaminas(dificultad);
-		manejoJuego();
+		try {
+			manejoJuego();
+		} catch (ExcepcionFilaInvalida | ExcepcionColumnaInvalida e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 
@@ -54,8 +63,10 @@ public class Menu {
 	/**
 	 * Metodo que tiene todo el manejo de un juego.
 	 * Se encarga de la interaccion con el usuario y de delegar responsabilidades
+	 * @throws ExcepcionColumnaInvalida 
+	 * @throws ExcepcionFilaInvalida 
 	 */
-	public void manejoJuego() {
+	public void manejoJuego() throws ExcepcionFilaInvalida, ExcepcionColumnaInvalida {
 		
 		boolean salir = false;
 
@@ -120,8 +131,10 @@ public class Menu {
 	/**
 	 * Metodo encargado de abrir las casillas
 	 * @return boolean, true si fue posible abrir la casilla, false en caso contrario
+	 * @throws ExcepcionColumnaInvalida 
+	 * @throws ExcepcionFilaInvalida 
 	 */
-	public boolean abrirCasilla() {
+	public boolean abrirCasilla() throws ExcepcionFilaInvalida, ExcepcionColumnaInvalida {
 
 		boolean abrir = false;
 		System.out.println("Por favor digite el número de la fila que desea abrir");
@@ -148,7 +161,7 @@ public class Menu {
 	 * Método que se encarga mostrar el menu de un juego al usuario
 	 * @return int - la seleccion del usuario
 	 */
-	public int menuJuego(){
+	public int menuJuego() {
 		System.out.println("Que deseas hacer ?");
 		System.out.println("1. Abrir una casilla ");
 		System.out.println("2. Dar pista ");
@@ -156,6 +169,14 @@ public class Menu {
 		System.out.println("4. Salir ");
 
 		int valor = lector.nextInt();
+		if(valor<1 || valor>4) {
+			try {
+				throw new ExcepcionComandoInvalido("Comando no permitido");
+			} catch (ExcepcionComandoInvalido e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		lector.nextLine();			
 		return valor;
 	}
