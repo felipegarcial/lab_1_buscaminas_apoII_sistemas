@@ -5,7 +5,7 @@ import modelo.Buscaminas;
 
 public class BuscaminasTest extends TestCase{
 	private Buscaminas buscaminas;
-	private int nivel = 3;
+	private int nivel = 1;
 	private void setupEsceneario(int nivel) {
 		buscaminas = new Buscaminas(nivel);
 	}
@@ -92,6 +92,10 @@ public class BuscaminasTest extends TestCase{
 		assertTrue(condition);
 	}
 	
+	
+	/**
+	 * Método para validar y generar minas
+	 */
 	public void testGenerarMinas() {
 		setupEsceneario(nivel);
 		int minas = 0;
@@ -105,6 +109,10 @@ public class BuscaminasTest extends TestCase{
 		assertEquals(minas,numeroMinasNivel(nivel));
 	}
 	
+	
+	/**
+	 * Método para validar el inicio de casillas libres
+	 */
 	public void testInicializarCasillasLibres() {
 		setupEsceneario(nivel);
 		int casillasLibres = 0;
@@ -124,6 +132,10 @@ public class BuscaminasTest extends TestCase{
 		assertEquals(tableroNivel(nivel),buscaminas.mostrarTablero());
 	}
 	
+	
+	/**
+	 * Método para validar resolver el bucaminas
+	 */
 	public void testResolver() {
 		setupEsceneario(nivel);
 		buscaminas.resolver();
@@ -139,39 +151,48 @@ public class BuscaminasTest extends TestCase{
 		assertTrue(casillasAbiertas==numeroCasillasNivel(nivel));
 	}
 	
+	/**
+	 * Método para validar abrir una casilla con una mina
+	 */
 	public void testAbrirCasillaPerder () {
 		setupEsceneario(nivel);
 		
 		int iCasilla = 0;
 		int jCasilla = 0;
 		
+		outerloop:
 		for (int i = 0; i < buscaminas.darCasillas().length; i++) {
 			for (int j = 0; j < buscaminas.darCasillas()[0].length; j++) {
 				if(buscaminas.darCasillas()[i][j].esMina()) {
 					iCasilla = i;
 					jCasilla = j;
-					break;
+					
+					break outerloop;
 				}
 			}
 		}
-		
+
 		buscaminas.abrirCasilla(iCasilla, jCasilla);
 		assertTrue(buscaminas.darPerdio()) ;
 	}
 	
+	/**
+	 * Método para validar abrir una casilla abirta
+	 */
 	public void testAbrirCasillaAbierta () {
 		setupEsceneario(nivel);
 		
 		int iCasilla = 0;
 		int jCasilla = 0;
 		
+		outerloop:
 		for (int i = 0; i < buscaminas.darCasillas().length; i++) {
 			for (int j = 0; j < buscaminas.darCasillas()[0].length; j++) {
 				if(!buscaminas.darCasillas()[i][j].esMina() && !buscaminas.darCasillas()[i][j].darSeleccionada()) {
 					iCasilla = i;
 					jCasilla = j;
 					buscaminas.abrirCasilla(iCasilla, jCasilla);
-					break;
+					break outerloop;
 				}
 			}
 		}
@@ -179,22 +200,58 @@ public class BuscaminasTest extends TestCase{
 		assertFalse(buscaminas.abrirCasilla(iCasilla, jCasilla));
 	}
 	
+	
+	/**
+	 * Método para validar abrir una casilla cerrada
+	 */
 	public void testAbrirCasillaCerrada () {
 		setupEsceneario(nivel);
 		
 		int iCasilla = 0;
 		int jCasilla = 0;
 		
+		outerloop:
 		for (int i = 0; i < buscaminas.darCasillas().length; i++) {
 			for (int j = 0; j < buscaminas.darCasillas()[0].length; j++) {
 				if(!buscaminas.darCasillas()[i][j].esMina() && !buscaminas.darCasillas()[i][j].darSeleccionada()) {
 					iCasilla = i;
 					jCasilla = j;
-					break;
+					break outerloop;
+				}
+			}
+		}
+		assertTrue(buscaminas.abrirCasilla(iCasilla, jCasilla));
+	}
+	
+	public void testDarPista() {
+		setupEsceneario(nivel);
+		String message = "";
+		outerloop:
+			for (int i = 0; i < buscaminas.darCasillas().length; i++) {
+			for (int j = 0; j < buscaminas.darCasillas()[0].length; j++) { 
+				if (!buscaminas.darCasillas()[i][j].esMina() && buscaminas.darCasillas()[i][j].darValor()>0) {
+					message = "Se abrió la casilla en la fila:" + " " + (i + 1) + " " + "y en la columna:" + " " + (j + 1);
+					break outerloop;
+				}
+			}
+		} 
+		
+		assertEquals(buscaminas.darPista(), message);
+	}
+	
+	public void testGano() {
+		setupEsceneario(nivel);
+		
+		for (int i = 0; i < buscaminas.darCasillas().length; i++) {
+			for (int j = 0; j < buscaminas.darCasillas()[0].length; j++) { 
+				if (!buscaminas.darCasillas()[i][j].esMina()) {
+
+					buscaminas.darCasillas()[i][j].destapar();
 				}
 			}
 		}
 		
-		assertTrue(buscaminas.abrirCasilla(iCasilla, jCasilla));
+		assertTrue(buscaminas.gano());
 	}
+
 }

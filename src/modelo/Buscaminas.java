@@ -340,10 +340,12 @@ public class Buscaminas {
 				}
 			}
 		}
+		
+	
 		// ------------------------------
 		int cantCasillas = casillas.length * casillas[0].length;
 		// ------------------------------
-		if (contadorCasillasAbiertas - cantMinas == cantCasillas - cantMinas) {
+		if (contadorCasillasAbiertas  == cantCasillas - cantMinas) {
 			return true;
 		}
 
@@ -363,7 +365,7 @@ public class Buscaminas {
 			for (int j = 0; j < casillas[0].length; j++) {
 				if (!casillas[i][j].esMina() && !casillas[i][j].darSeleccionada() && casillas[i][j].darValor() > 0) {
 					casillas[i][j].destapar();
-					return "Se abrió la casilla en la fila:" + " " + (i + 1) + " " + "y en la culumna:" + " " + (j + 1);
+					return "Se abrió la casilla en la fila:" + " " + (i + 1) + " " + "y en la columna:" + " " + (j + 1);
 				}
 			}
 		}
